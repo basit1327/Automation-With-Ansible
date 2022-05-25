@@ -1,0 +1,39 @@
+---
+
+- hosts: loader_backend_servers
+  remote_user: ec2-user
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Install apache packages 
+      yum:
+        name: httpd
+        state: present
+    - name: ensure httpd is running
+      service:
+        name: httpd 
+        state: started
+
+    - name: Copying homepage
+      copy:
+        src: files/homepage/index.html
+        dest: /var/www/html   
+
+- hosts: loader_frontend_servers
+  remote_user: ec2-user
+  gather_facts: no
+  become: true
+  tasks:
+    - name: Install apache packages 
+      yum:
+        name: httpd
+        state: present
+    - name: ensure httpd is running
+      service:
+        name: httpd 
+        state: started
+
+    - name: Copying homepage
+      copy:
+        src: files/homepage/index.html
+        dest: /var/www/html    

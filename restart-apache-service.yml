@@ -1,0 +1,23 @@
+---
+
+- hosts: loader_backend_servers
+  remote_user: ec2-user
+  become: true
+  gather_facts: no
+  tasks:
+   - name: Restarting Apache
+     command: sudo apachectl restart
+     ignore_errors: yes
+     changed_when: false
+     register: service_apache_status  
+
+- hosts: loader_frontend_servers
+  remote_user: ec2-user
+  gather_facts: no
+  become: true
+  tasks:
+    - name: Restarting Apache
+      command: sudo apachectl restart
+      ignore_errors: yes
+      changed_when: false
+      register: service_apache_status 

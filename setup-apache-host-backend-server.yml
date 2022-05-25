@@ -1,0 +1,21 @@
+---
+
+- hosts: loader_backend_servers
+  remote_user: ec2-user
+  become: true
+  gather_facts: no
+  tasks:
+   - name: Copying /frontend_server/httpd.conf to remote location (/etc/httpd/conf/httpd.conf)
+     copy:
+       src: files/apache_conf/backend_server/httpd.conf
+       dest: /etc/httpd/conf/
+   - name: Changing /var/www/html permission chown
+     shell:
+       sudo chown ec2-user /var/www/html/      
+   - name: Changing /var/www/html permission chmod
+     shell:
+       sudo chmod 755 /var/www/html/
+   - name: Copying ansible_confirmation/index.html to remote location (/var/www/html)
+     copy:
+       src: files/ansible_confirmation/index.html
+       dest: /var/www/html

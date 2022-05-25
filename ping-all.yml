@@ -1,0 +1,13 @@
+---
+
+- hosts: loader_backend_servers
+  remote_user: ec2-user
+  gather_facts: no
+  tasks:
+    - action: ping
+
+- hosts: loader_frontend_servers
+  remote_user: ec2-user
+  gather_facts: no
+  tasks:
+    - action: ping    

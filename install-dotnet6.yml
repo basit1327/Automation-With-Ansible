@@ -1,0 +1,20 @@
+---
+
+- hosts: loader_backend_servers
+  remote_user: ec2-user
+  become: true
+  gather_facts: no
+  tasks:
+   - name: Downloading .NET RPM
+     ignore_errors: yes
+     shell:
+       sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
+   - name: Installing dotnet-runtime-6.0
+     shell:
+       sudo yum -y install dotnet-runtime-6.0
+   - name: Installing dotnet-sdk-6.0
+     shell:
+       sudo yum -y install dotnet-sdk-6.0   
+
+
+       

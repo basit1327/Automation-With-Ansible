@@ -1,0 +1,17 @@
+---
+
+- hosts: loader_backend_servers
+  remote_user: ec2-user
+  become: true
+  gather_facts: no
+  tasks:
+   - name: Creating directory /configurations/loader
+     shell:
+       cd / && sudo mkdir -p /configurations
+   - name: Copying dotnet_conf/loader/ to remote location (/configuration/loader)
+     copy:
+       src: files/dotnet_conf/
+       dest: /configurations
+   - name: Changing /configurations/loader/run_dll.sh permission
+     shell:
+       sudo chmod 755 /configurations/loader/run_dll.sh   

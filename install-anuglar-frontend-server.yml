@@ -1,0 +1,16 @@
+---
+
+- hosts: loader_frontend_servers
+  remote_user: ec2-user
+  become: true
+  gather_facts: no
+  tasks:
+   - name: Downloading RPM for Node/NPM v12.x
+     shell:
+       curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
+   - name: Installing Node/NPM v12.x
+     shell:
+       sudo yum -y install nodejs    
+   - name: Installing Anuglar CLI
+     shell:
+       npm install -g @angular/cli 
