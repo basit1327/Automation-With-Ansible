@@ -1,4 +1,4 @@
-# Automation-With-Ansible
+# Automating Server configuration with Ansible
 This repository contain ansible playbook that i use for configuring servers (both frontend/backend)
 
 
