@@ -1,0 +1,14 @@
+[loader_backend_servers]
+34.250.248.93
+
+[loader_frontend_servers]
+52.16.198.71
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[loader_backend_servers:vars]
+ansible_ssh_private_key_file=/Users/basitraza/.ssh/gm/staging.pem
+
+[loader_frontend_servers:vars]
+ansible_ssh_private_key_file=/Users/basitraza/.ssh/gm/staging.pem
